@@ -18,6 +18,24 @@ with open('scikit_learn_svm.pickle', 'rb') as f:
 # Function to predict clusters and URLs
 
 
+def display_instructions():
+    instructions = """
+    Instructions:
+    1. Open the app in your web browser.
+    2. Enter your news text in the text area provided.
+    3. Click on the "Cluster News" button.
+    4. The app will predict the cluster number and URL for the entered news text.
+    5. The predicted cluster number and URL will be displayed below the button.
+    6. If the predicted cluster number is not recognized, the URL will be displayed as "Unknown".
+    
+    Please note that the app may take some time to process the news text and display the results.
+    
+    If you encounter any issues or have specific questions about the app, please let me know, and I'll be happy to assist you further.
+    """
+    print(instructions)
+
+# Call the function to display the instructions
+display_instructions()
 def predict_clusters_and_urls(text):
     # Predict cluster numbers
     sgd_cluster = sgd_pipe.predict([text])[0]
@@ -25,15 +43,15 @@ def predict_clusters_and_urls(text):
     
     # Define URLs based on cluster categories
     url_mapping = {
-        'sport': 'https://www.bbc.com/sport',
-        'politics': 'https://www.bbc.com/news/world',
-        'business': 'https://www.bbc.com/business',
-        'entertainment': 'https://www.bbc.com/culture/entertainment-news'
+        '0': 'https://www.bbc.com/sport',
+        '1': 'https://www.bbc.com/news/world',
+        '2': 'https://www.bbc.com/business',
+        '3': 'https://www.bbc.com/culture/entertainment-news'
     }
     
     # Get the cluster categories
-    sgd_category = {v: k for k, v in svc_pipe.named_steps['clf'].classes_}[sgd_cluster]
-    svc_category = {v: k for k, v in sgd_pipe.named_steps['clf'].classes_}[svc_cluster]
+    sgd_category = 'Unknown' if str(sgd_cluster) not in url_mapping else str(sgd_cluster)
+    svc_category = 'Unknown' if str(svc_cluster) not in url_mapping else str(svc_cluster)
     
     return {
         'Top cluster number (SGD)': sgd_cluster,
