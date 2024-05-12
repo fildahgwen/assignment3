@@ -61,33 +61,7 @@ def predict_clusters_and_urls(text):
         'URL (SGD)': sgd_url,
         'URL (SVC)': svc_url
     }
-"""
-# Call the function to display the instructions
-display_instructions()
-def predict_clusters_and_urls(text):
-    # Predict cluster numbers
-    sgd_cluster = sgd_pipe.predict([text])[0]
-    svc_cluster = svc_pipe.predict([text])[0]
-    
-    # Define URLs based on cluster categories
-    url_mapping = {
-        '0': 'https://www.bbc.com/sport',
-        '1': 'https://www.bbc.com/news/world',
-        '2': 'https://www.bbc.com/business',
-        '3': 'https://www.bbc.com/culture/entertainment-news'
-    }
-    
-    # Get the cluster categories
-    sgd_category = 'Unknown' if str(sgd_cluster) not in url_mapping else str(sgd_cluster)
-    svc_category = 'Unknown' if str(svc_cluster) not in url_mapping else str(svc_cluster)
-    
-    return {
-        'Top cluster number (SGD)': sgd_cluster,
-        'Top cluster number (SVC)': svc_cluster,
-        'URL (SGD)': url_mapping.get(sgd_category, None),
-        'URL (SVC)': url_mapping.get(svc_category, None)
-    }
-"""
+
 # Streamlit app
 st.title('News Clustering App')
 
