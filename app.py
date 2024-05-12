@@ -17,50 +17,31 @@ with open('scikit_learn_svm.pickle', 'rb') as f:
 
 # Function to predict clusters and URLs
 
+
 def predict_clusters_and_urls(text):
     # Predict cluster numbers
     sgd_cluster = sgd_pipe.predict([text])[0]
     svc_cluster = svc_pipe.predict([text])[0]
     
-    # Map cluster numbers to URLs
+    # Define URLs based on cluster categories
     url_mapping = {
-        0: 'https://www.bbc.com/sport',
-        1: 'https://www.bbc.com/news/world',
-        2: 'https://www.bbc.com/business',
-        3: 'https://www.bbc.com/culture/entertainment-news'
+        'sport': 'https://www.bbc.com/sport',
+        'politics': 'https://www.bbc.com/news/world',
+        'business': 'https://www.bbc.com/business',
+        'entertainment': 'https://www.bbc.com/culture/entertainment-news'
     }
+    
+    # Get the cluster categories
+    sgd_category = {v: k for k, v in svc_pipe.named_steps['clf'].classes_}[sgd_cluster]
+    svc_category = {v: k for k, v in sgd_pipe.named_steps['clf'].classes_}[svc_cluster]
     
     return {
         'Top cluster number (SGD)': sgd_cluster,
         'Top cluster number (SVC)': svc_cluster,
-        'URL (SGD)': url_mapping.get(sgd_cluster, None),
-        'URL (SVC)': url_mapping.get(svc_cluster, None)
+        'URL (SGD)': url_mapping.get(sgd_category, None),
+        'URL (SVC)': url_mapping.get(svc_category, None)
     }
-'''def predict_clusters_and_urls(text):
-    # Predict cluster numbers
-    sgd_cluster = sgd_pipe.predict([text])[0]
-    svc_cluster = svc_pipe.predict([text])[0]
-    
-    # Map cluster numbers to category names
-    cluster_mapping = {0: 'sport', 1: 'politics', 2: 'business', 3: 'entertainment'}
-    
-    # Define URLs for each cluster
-    urls = {
-        0: 'https://www.bbc.com/sport',
-        1: 'https://www.bbc.com/news/world',
-        2: 'https://www.bbc.com/business',
-        3: 'https://www.bbc.com/culture/entertainment-news'
-    }
-    
-    return {
-        'Top cluster number (SGD)': sgd_cluster,
-        'Top cluster number (SVC)': svc_cluster,
-        'Top cluster category (SGD)': cluster_mapping.get(sgd_cluster, 'Unknown'),
-        'Top cluster category (SVC)': cluster_mapping.get(svc_cluster, 'Unknown'),
-        'URL (SGD)': urls.get(sgd_cluster, 'Unknown'),
-        'URL (SVC)': urls.get(svc_cluster, 'Unknown')
-    }
-'''
+
 # Streamlit app
 st.title('News Clustering App')
 
