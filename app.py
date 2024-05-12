@@ -16,7 +16,27 @@ with open('scikit_learn_svm.pickle', 'rb') as f:
     svc_pipe = pickle.load(f)
 
 # Function to predict clusters and URLs
+
 def predict_clusters_and_urls(text):
+    # Predict cluster numbers
+    sgd_cluster = sgd_pipe.predict([text])[0]
+    svc_cluster = svc_pipe.predict([text])[0]
+    
+    # Map cluster numbers to URLs
+    url_mapping = {
+        0: 'https://www.bbc.com/sport',
+        1: 'https://www.bbc.com/news/world',
+        2: 'https://www.bbc.com/business',
+        3: 'https://www.bbc.com/culture/entertainment-news'
+    }
+    
+    return {
+        'Top cluster number (SGD)': sgd_cluster,
+        'Top cluster number (SVC)': svc_cluster,
+        'URL (SGD)': url_mapping.get(sgd_cluster, None),
+        'URL (SVC)': url_mapping.get(svc_cluster, None)
+    }
+'''def predict_clusters_and_urls(text):
     # Predict cluster numbers
     sgd_cluster = sgd_pipe.predict([text])[0]
     svc_cluster = svc_pipe.predict([text])[0]
@@ -40,7 +60,7 @@ def predict_clusters_and_urls(text):
         'URL (SGD)': urls.get(sgd_cluster, 'Unknown'),
         'URL (SVC)': urls.get(svc_cluster, 'Unknown')
     }
-
+'''
 # Streamlit app
 st.title('News Clustering App')
 
