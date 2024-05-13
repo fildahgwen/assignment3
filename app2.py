@@ -20,7 +20,7 @@ def predict_cluster(text):
 
 
 # Streamlit app
-st.title(page_title="News Clustering App", page_icon="📰", layout="wide", initial_sidebar_state="expanded")
+st.title("News Clustering App")
 
 text_input = st.text_input('Enter a story:')
 if st.button('Predict Cluster'):
