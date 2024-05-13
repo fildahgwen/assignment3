@@ -48,8 +48,9 @@ def predict_clusters_and_urls(text):
     }
     
     # Get the cluster categories
-    sgd_category = {v: k for k, v in list(sgd_pipe.named_steps['clf'].classes_)}[sgd_cluster]
-    svc_category = {v: k for k, v in list(svc_pipe.named_steps['clf'].classes_)}[svc_cluster]
+   
+    sgd_category = sgd_pipe.named_steps['clf'].classes_[sgd_cluster]
+    svc_category = svc_pipe.named_steps['clf'].classes_[svc_cluster]
    
     
     # Map cluster categories to URLs
