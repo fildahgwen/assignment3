@@ -18,20 +18,24 @@ def predict_cluster(text):
     cluster = sgd_pipe.predict([text])[0]
     return cluster
 
-# Streamlit app
-# Set the background color to Benjamin Moore Hale Navy
+##
+st.set_page_config(page_title="Story Clustering App", page_icon="📰", layout="wide", initial_sidebar_state="expanded")
+st.markdown(
+    
+    <style>
+    body {
+        background-color: #2e3f4f;
+    }
+    </style>
+    ,
+    unsafe_allow_html=True
+)
 
-# Add the newspaper icon to the app titlest.title("<i class='fas fa-newspaper'></i> Your App Title", unsafe_allow_html=True)
 
-# Include Font Awesome library
-st.markdown('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">', unsafe_allow_html=True)
-
-# Add the newspaper icon to the app title
-st.title("<i class='fas fa-newspaper'></i> Your App Title", unsafe_allow_html=True)
 ##
 
-
-st.title('Story Clustering App')
+# Streamlit app
+#st.title('Story Clustering App')
 
 text_input = st.text_input('Enter a story:')
 if st.button('Predict Cluster'):
