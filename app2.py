@@ -20,16 +20,6 @@ def predict_cluster(text):
 
 # Streamlit app
 # Set the background color to Benjamin Moore Hale Navy
-st.markdown(
-    """
-    <style>
-    body {
-        background-color: #4D648D; /* Benjamin Moore Hale Navy */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Add the newspaper icon to the app titlest.title("<i class='fas fa-newspaper'></i> Your App Title", unsafe_allow_html=True)
 
@@ -41,7 +31,7 @@ st.title("<i class='fas fa-newspaper'></i> Your App Title", unsafe_allow_html=Tr
 ##
 
 
-##st.title('Story Clustering App')
+st.title('Story Clustering App')
 
 text_input = st.text_input('Enter a story:')
 if st.button('Predict Cluster'):
