@@ -18,24 +18,9 @@ def predict_cluster(text):
     cluster = sgd_pipe.predict([text])[0]
     return cluster
 
-##
-st.set_page_config(page_title="Story Clustering App", page_icon="📰", layout="wide", initial_sidebar_state="expanded")
-st.markdown(
-    
-    <style>
-    body {
-        background-color: #2e3f4f;
-    }
-    </style>
-    ,
-    unsafe_allow_html=True
-)
-
-
-##
 
 # Streamlit app
-#st.title('Story Clustering App')
+st.title(page_title="News Clustering App", page_icon="📰", layout="wide", initial_sidebar_state="expanded")
 
 text_input = st.text_input('Enter a story:')
 if st.button('Predict Cluster'):
