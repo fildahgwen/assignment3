@@ -5,6 +5,14 @@ import pickle
 with open('scikit_learn_sgd.pickle', 'rb') as f:
     sgd_pipe = pickle.load(f)
 
+# Model Description
+model_description = """
+This application utilizes k-means clustering to displays a cluster and the urls of related stories in that
+cluster.
+**INSTRUCTUCTIONS
+PASTE ANY STORY IN THE TEXT BAR
+"""
+
 # Define the URL mappings for each cluster
 url_mappings = {
     'sports': 'https://www.bbc.com/sport',
