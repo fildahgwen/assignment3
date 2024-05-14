@@ -5,13 +5,17 @@ import pickle
 with open('scikit_learn_sgd.pickle', 'rb') as f:
     sgd_pipe = pickle.load(f)
 
-# Model Description
-model_description = 
-This application utilizes k-means clustering to displays a cluster and the urls of related stories in that
-cluster.
-**INSTRUCTUCTIONS
-PASTE ANY STORY IN THE TEXT BAR
-
+def main():
+    st.set_page_config(
+    page_title="Assistive app for the visually impaired",
+    page_icon="👁️‍🗨️",
+    initial_sidebar_state="collapsed",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "# This is a header. This is an *extremely* cool app!"
+    }
+)
 
 # Define the URL mappings for each cluster
 url_mappings = {
